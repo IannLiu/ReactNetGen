@@ -17,8 +17,8 @@ For basic use, installing:
 * tqdm
 
 RMG-database can be installed as the rank engine by installing
-* [RMG-Py](https://github.com/ReactionMechanismGenerator/RMG-Py)
-* [RMG-database](https://github.com/ReactionMechanismGenerator/RMG-database)
+* [RMG-Py (version == 3.1.0)](https://github.com/ReactionMechanismGenerator/RMG-Py)
+* [RMG-database (version == 3.0.0)](https://github.com/ReactionMechanismGenerator/RMG-database)
 
 ## Usage
 ### Basic usage (Finding possible reaction pathways)
@@ -92,4 +92,4 @@ The reaction template can be forbiden by specifying variable ```dropped_temp``` 
 The user tranined LRT mdoel can be added to ```ReactNetGen\reactranker\model_results``` for ranking reaction pathways.
 
 ### Ranking reaction pathways using RMG-database
-RMG-database --3.1 can be installed as the rank engine by installing
+RMG-database(version 3.0.0) can be installed as the rank engine. The reactions are ranked by RMG rate rules and RMG group additivity based on RMG-database(by specifying using_rmg_database). 
