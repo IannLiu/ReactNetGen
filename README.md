@@ -92,4 +92,4 @@ The reaction template can be forbiden by specifying variable ```dropped_temp``` 
 The user tranined LRT mdoel can be added to ```ReactNetGen\reactranker\model_results``` for ranking reaction pathways.
 
 ### Ranking reaction pathways using RMG-database
-RMG-database(version 3.0.0) can be installed as the rank engine. The reactions are ranked by RMG rate rules and RMG group additivity based on RMG-database(by specifying using_rmg_database). 
+RMG-database(version 3.0.0) can be installed as the rank engine. The reactions are ranked by RMG rate rules and RMG group additivity based on RMG-database(by ```specifying using_rmg_database```). 
