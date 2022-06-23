@@ -2,7 +2,7 @@
 
 [![MIT license](http://img.shields.io/badge/license-MIT-brightgreen.svg)](http://opensource.org/licenses/MIT)
 
-Enable ranking elementary reactions and generating reaction networks. The rank information was learned by an uncertainty calibrated learning to rank (LTR) model on the [quantum chemical data](https://zenodo.org/record/3715478) and [RMG-database](https://github.com/ReactionMechanismGenerator/RMG-database).
+Enable ranking elementary reactions and generating reaction networks. The rank information was learned by an uncertainty calibrated learning to rank (LTR) model on the [quantum chemical database](https://zenodo.org/record/3715478) and [RMG-database](https://github.com/ReactionMechanismGenerator/RMG-database).
 
 * Uncertainty-calibrated deep learning approach for rapid identification of gas-phase reaction networks: peer-reviewed publication (open access).
 
@@ -90,3 +90,6 @@ The reaction template can be forbiden by specifying variable ```dropped_temp``` 
 
 ### Adding LTR models
 The user tranined LRT mdoel can be added to ```ReactNetGen\reactranker\model_results``` for ranking reaction pathways.
+
+### Ranking reaction pathways using RMG-database
+RMG-database --3.1 can be installed as the rank engine by installing
