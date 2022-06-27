@@ -15,6 +15,7 @@ For basic use, installing:
 * rdkit
 * sklearn
 * tqdm
+* networkx
 
 RMG-database can be installed as the rank engine by installing
 * [RMG-Py (version == 3.1.0)](https://github.com/ReactionMechanismGenerator/RMG-Py)
