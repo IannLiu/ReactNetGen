@@ -245,7 +245,8 @@ class DataProcessor:
                 
     def generate_pred_batch_per_query(self,
                                       df=None,
-                                      smiles_name=None):
+                                      smiles_name=None,
+                                      add_features_name='temperatures'):
         """
         Get the batch extracted from every query
 
@@ -258,10 +259,14 @@ class DataProcessor:
         reactants = df.rsmi.unique()
         for reactant in reactants:
             df_reactant = df[df.rsmi == reactant]
+            if add_features_name is not None:
+                add_feature = df_reactant[add_features_name].values
+            if len(add_feature.shape) == 1:
+                add_feature = add_feature.reshape(-1, 1)
             if smiles_name is not None:
-                yield df_reactant[smiles_name].values
+                yield df_reactant[smiles_name].values,  add_feature
             else:
-                yield df_reactant.values
+                yield df_reactant.values, add_feature
 
     def generate_batch_querys(self,
                               df=None,

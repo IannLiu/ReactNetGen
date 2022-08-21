@@ -36,7 +36,7 @@ def str_to_mol(string: str, explicit_hydrogens: bool = True) -> Chem.Mol:
         return Chem.RemoveHs(mol)
 
 
-def form_data(reactants, outcomes):
+def form_data(reactants, outcomes, temperatures):
     """
     This function is to form DataFrame for rank reactions
     
@@ -49,8 +49,12 @@ def form_data(reactants, outcomes):
         rsmi = reactants * len(outcomes)
     else:
         rsmi = reactants
-    reaction_list = [[r, p] for r, p in zip(rsmi, outcomes)]
-    reaction_df = pd.DataFrame(reaction_list, columns = ['rsmi', 'psmi'])
+    if len(temperatures) != len(outcomes):
+        temp = temperatures * len(outcomes)
+    else:
+        temp = temperatures
+    reaction_list = [[r, p, t/1000] for r, p, t in zip(rsmi, outcomes, temp)]
+    reaction_df = pd.DataFrame(reaction_list, columns = ['rsmi', 'psmi', 'temperatures'])
     
     return reaction_df
     
@@ -103,7 +107,8 @@ def rank_reactions(model_path, reaction_data, train_strategy='listnet',
                                 use_bias=True,
                                 dropout=0.1,
                                 task_num=2,
-                                ffn_last_layer='with_softplus')
+                                ffn_last_layer='with_softplus',
+                                add_features_dim=1)
         else:
             model = build_model(hidden_size=model_dic['hidden_size'],
                                 mpnn_depth=model_dic['mpnn_depth'],

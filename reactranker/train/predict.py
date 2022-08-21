@@ -41,13 +41,13 @@ def test(model: object, test_data: object, path_checkpoints: object, smiles2grap
     smiles_without_map_list = []
     smiles_with_map_list = []
     preds_list = []
-    for smiles in test_data_processor.generate_pred_batch_per_query(smiles_name=smiles_name):
+    for smiles, add_features in test_data_processor.generate_pred_batch_per_query(smiles_name=smiles_name):
         smiles = smiles.tolist()
         rsmi = [s[0] for s in smiles]
         psmi = [s[1] for s in smiles]
         r_batch_graph = smiles2graph_dic.parsing_smiles(rsmi)
         p_batch_graph = smiles2graph_dic.parsing_smiles(psmi)
-        preds = model(r_batch_graph, p_batch_graph, gpu=gpu)
+        preds = model(r_batch_graph, p_batch_graph, gpu=gpu, add_features=add_features)
 
         # transfer atom mapped smiles to none mapped
         rsmi_without_map = [Chem.MolToSmiles(Chem.MolFromSmiles(i)) for i in rsmi]

@@ -267,7 +267,7 @@ def run_one_rank(reactants, react_dic, react_dic_reverse=None,
     
 def NetGen(react_list: list, ranks: int, cut_off, min_paths: int, bi_molecule, react_dic, react_dic_reverse, 
            use_reverse_temp, use_uncertainty=False, dropped_temp=None, model_path=None, show_info=True, 
-           rank_pathways=True, using_rmg_database=False, rmg_estimator='group additivity'):
+           rank_pathways=True, using_rmg_database=False, rmg_estimator='group additivity', temperature=1000, pressure=1):
     """
     define the reaction_dic and species_dic
     if species in species_dic, this species should be removed 
@@ -378,14 +378,14 @@ def NetGen(react_list: list, ranks: int, cut_off, min_paths: int, bi_molecule, r
                 continue
             if rank_pathways:
                 # rank reactions
-                reaction_df = form_data([rsmi_mapped], outcomes)
+                reaction_df = form_data([rsmi_mapped], outcomes, [temperature])
                 if using_rmg_database and rank_by_rmg:
-                    sort_smile_with_map_and_scores, sort_smile = rank_reactions_by_rmg(reaction_df, 1000, 1, rmg_estimator)
+                    sort_smile_with_map_and_scores, sort_smile = rank_reactions_by_rmg(reaction_df, temperature, pressure, rmg_estimator)
                     rank_counter += 1
                     # num_path_rmg_ranked += reaction_df.shape[0]
                     # some of reactants might not be selected
                 else:
-                    sort_smile_with_map_and_scores, sort_smile = rank_reactions(path, reaction_df)
+                    sort_smile_with_map_and_scores, sort_smile = rank_reactions(path, reaction_df, fold_number=5)
                     rank_counter += 1
                     # all reactants can be ranked
                     
